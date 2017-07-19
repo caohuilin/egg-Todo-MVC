@@ -10,15 +10,28 @@ module.exports = appInfo => {
   config.view = {
     defaultViewEngine: 'nunjucks',
     mapping: {
-      '.tpl': 'nunjucks',
-    },
+      '.tpl': 'nunjucks'
+    }
   };
   config.news = {
     pageSize: 5,
-    serverUrl: 'https://hacker-news.firebaseio.com/v0',
+    serverUrl: 'https://hacker-news.firebaseio.com/v0'
   };
   config.logger = {
-    level: 'DEBUG',
+    level: 'DEBUG'
   };
+  config.mongoose = {
+    url: 'mongodb://127.0.0.1/todomvc',
+    options: {}
+  };
+  config.security = {
+    csrf: {
+      enable: false
+    },
+    xframe: {
+      enable: false
+    }
+  };
+
   return config;
 };

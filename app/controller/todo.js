@@ -1,7 +1,9 @@
 module.exports = app => {
   class ToDoController extends app.Controller {
     *list(ctx) {
-      ctx.body = yield ctx.model.Todo.find({}).sort({ createTime: 'desc' }); // you should use upper case to access mongoose model
+      ctx.body = yield ctx.model.Todo
+        .find({ deleted: false })
+        .sort({ createTime: 'desc' }); // you should use upper case to access mongoose model
     }
     *create(ctx) {
       const createRule = {
@@ -16,6 +18,14 @@ module.exports = app => {
         ctx.body = { successed: true };
         ctx.status = 201;
       }
+    }
+    *delete(ctx) {
+      yield ctx.model.Todo.update(
+        { _id: ctx.request.body.id },
+        { $set: { deleted: true } }
+      );
+      ctx.body = { successed: true };
+      ctx.status = 200;
     }
   }
   return ToDoController;

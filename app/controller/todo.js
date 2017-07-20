@@ -8,9 +8,14 @@ module.exports = app => {
         content: { type: 'string' }
       };
       ctx.validate(createRule);
-      yield ctx.model.Todo.create(ctx.request.body);
-      ctx.body = { successed: true };
-      ctx.status = 201;
+      if (!ctx.request.body.content.trim().length) {
+        ctx.status = 400;
+        ctx.body = { successed: false, error: 'params error' };
+      } else {
+        yield ctx.model.Todo.create(ctx.request.body);
+        ctx.body = { successed: true };
+        ctx.status = 201;
+      }
     }
   }
   return ToDoController;

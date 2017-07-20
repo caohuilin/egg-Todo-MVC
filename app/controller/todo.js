@@ -19,10 +19,10 @@ module.exports = app => {
         ctx.status = 201;
       }
     }
-    *delete(ctx) {
+    *update(ctx) {
       yield ctx.model.Todo.update(
         { _id: ctx.request.body.id },
-        { $set: { deleted: true } }
+        { $set: ctx.request.body }
       );
       ctx.body = { successed: true };
       ctx.status = 200;

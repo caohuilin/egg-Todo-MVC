@@ -5,5 +5,5 @@ module.exports = app => {
   app.get('/news', app.controller.news.list);
   app.get('/todos', app.controller.todo.list);
   app.post('/todos', app.controller.todo.create);
-  app.put('/todos', app.controller.todo.delete);
+  app.put('/todos', app.controller.todo.update);
 };

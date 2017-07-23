@@ -30,7 +30,8 @@ module.exports = appInfo => {
     },
     xframe: {
       enable: false
-    }
+    },
+    domainWhiteList: [ 'http://localhost:6075' ],
   };
 
   return config;
